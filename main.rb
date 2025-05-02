@@ -1,32 +1,14 @@
-people = {
-    "test": {
-      dialogue: ["testDialogue1"]
-    }
-}
-affects = {
-  testDialogue1: {
-    y: {
+require_relative 'text'
 
-    },
-    n: {
-
-    }
-  }
-}
-
-text = {
-  testDialogue1: {
-    question: "Can I have a sandwich?",
-    y: "Yay!!!",
-    n: "Aww ):",
-    affects: affects["testDialogue1"]
-  }
-}
-
+people = Text::PEOPLE
+affects = Text::AFFECTS
+text = Text::TEXT
 
 
 eventArray = []
 
-def render(data)
 
-end
+personDialogue = people[rand(4)][:dialogue]
+puts personDialogue
+personQuestion = text[personDialogue.first][:question]
+puts personQuestion
