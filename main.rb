@@ -7,6 +7,9 @@ text = Text::TEXT
 
 eventArray = []
 
+money = 200
+citizens = 50
+happiness = 80
 
 personDialogue = people[rand(4)][:dialogue]
 puts personDialogue
