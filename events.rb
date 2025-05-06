@@ -5,7 +5,7 @@ module Events
       text: "There's a party at the tavern tonight, your citizens are happy!"
       recurring: 0,
       affects: AFFECTS["tavern"],
-      condition: { KINGDOM[:happiness] > 100 }
+      condition: { (KINGDOM[:happiness] > 100) }
     }
  }
 
