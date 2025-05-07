@@ -23,7 +23,7 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
     
     6.times do
-        personDialogue = people[rand(people.length())][:dialogue]
+        personDialogue = people[rand(people.length())][:dialogue].sample
         puts personDialogue if debug
         personQuestion = text[personDialogue.first][:question]
         puts personQuestion
@@ -33,12 +33,21 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         until key == "y" || key == "n"
             key = reader.read_keypress
         end
-
+        prevKingdom = KINGDOM.dup
         # shows ye or no
-        puts text[personDialogue.first][key]
-
-        # applies the effect
-        text[personDialogue.first][:affects][key].call
+        if key == "y"
+            puts text[personDialogue.first][:y]
+            text[personDialogue.first][:affects][:y].call
+        else 
+            puts text[personDialogue.first][:n]
+            text[personDialogue.first][:affects][:n].call
+        end
+        KINGDOM.each do |key, value|
+            difference = value - prevKingdom[key]
+            difference = "+"+difference.to_s if difference > 0
+            puts "#{key.capitalize}: #{difference}" if difference != 0
+        end
+        
     end
 
     # makes sure happiness and citizens dont go into the negatives

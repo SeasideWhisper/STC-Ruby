@@ -10,7 +10,7 @@ module Text
       name: "Lil Fang"
     },
     {
-      dialogue: ["hauntingServices"],
+      dialogue: ["hauntingServices", "nickName", "vampireCrystal"],
       name: "Monsieur Esprit"
     },
     {
@@ -53,8 +53,12 @@ module Text
       n: -> { KINGDOM[:happiness] -= 5 }
     },
     "feelinSpooky" => {
-      y: -> { KINGDOM[:happiness] -= 5 },
+      y: -> { KINGDOM[:citizens] -= 1 },
       n: -> {}
+    },
+    "nickName" => {
+      y: -> { KINGDOM[:happiness] +=1 },
+      n: -> { KINGDOM[:happiness] -=1 }
     },
     "hauntingServices" => {
       y: -> {
@@ -84,9 +88,9 @@ module Text
     "slayGoblins" => {
       y: -> {
         KINGDOM[:money] -= 10
-        KINGDOM[:people] += 5
+        KINGDOM[:citizens] += 5
       },
-      n: -> { KINGDOM[:people] -= 3 }
+      n: -> { KINGDOM[:citizens] -= 3 }
     },
     "coolGuy" => {
       y: -> { KINGDOM[:happiness] += 5 },
@@ -95,7 +99,7 @@ module Text
     "plantTrees" => {
       y: -> {
         KINGDOM[:happiness] += 4
-        KINGDOM[:people] += 1
+        KINGDOM[:citizens] += 1
         KINGDOM[:money] -= 20
       },
       n: -> { KINGDOM[:happiness] -= 2 }
@@ -110,13 +114,13 @@ module Text
     "dragonSighting" => {
       y: -> {
         KINGDOM[:happiness] -= 10
-        KINGDOM[:people] -= 2
+        KINGDOM[:citizens] -= 2
       },
       n: -> {
         KINGDOM[:happiness] += 2
       }
     }
-  }
+  }.freeze
 
   TEXT = {
     "goAdventure" => {
@@ -127,9 +131,15 @@ module Text
     },
     "feelinSpooky" => {
       question: "You feelin’ spooky today?",
-      y: "Muahaha!",
-      n: "Aww, okay.",
+      y: "Heck yeah! Let the blood flow!",
+      n: "Not even a little spook? Little baby bat?",
       affects: AFFECTS["feelinSpooky"]
+    },
+    "nickName" => {
+      question: "I'm the Duke of Spook! Do you want a spooky nickname?",
+      y: "Hmm... You can be... The Creep Queen?",
+      n: "Aw, man... You're no fun.",
+      affects: AFFECTS["nickName"]
     },
     "hauntingServices" => {
       question: "Do you require any haunting services? For a small price I’ll scare some people for you.",
