@@ -5,7 +5,6 @@ debug = false
 
 reader = TTY::Reader.new
 
-
 people = Text::PEOPLE
 affects = Text::AFFECTS
 text = Text::TEXT
@@ -18,10 +17,7 @@ KINGDOM = {
     happiness: 80
 }
 
-# USE `bundle install` TO INSTALL DEPENDENCEIS
-
-
-
+# USE `bundle install` TO INSTALL DEPENDENCIES
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
@@ -32,22 +28,29 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         personQuestion = text[personDialogue.first][:question]
         puts personQuestion
         key = ""
-        while key != "y" || key != "n"
+
+        # yo ben i fixed it so that it loops until "y" or "n" is entered
+        until key == "y" || key == "n"
             key = reader.read_keypress
         end
 
+        # shows ye or no
+        puts text[personDialogue.first][key]
+
+        # applies the effect
+        text[personDialogue.first][:affects][key].call
     end
 
-    # Ensure values don't go negative
+    # makes sure happiness and citizens dont go into the negatives
     KINGDOM[:citizens] = [KINGDOM[:citizens], 0].max
     KINGDOM[:happiness] = [KINGDOM[:happiness], 0].max
 
-    # Break the loop if the kingdom collapses
+    # stops if kingdom dies or collapses or whatever
     break if KINGDOM[:money] <= -1000 || KINGDOM[:citizens] <= 5
 end
 
 if KINGDOM[:money] <= -1000 
-puts "The kingdom has gone bankrupt and collapsed!"
+    puts "The kingdom has gone bankrupt and collapsed!"
 elsif KINGDOM[:citizens] <= 5
     puts "The kingdom has lost too many citizens and collapsed!"
 end
