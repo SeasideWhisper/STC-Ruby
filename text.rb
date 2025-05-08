@@ -6,11 +6,11 @@ module Text
       name: "Yet Yet"
     },
     {
-      dialogue: ["feelinSpooky"],
+      dialogue: ["feelinSpooky",  "nickName", "vampireCrystal"],
       name: "Lil Fang"
     },
     {
-      dialogue: ["hauntingServices", "nickName", "vampireCrystal"],
+      dialogue: ["hauntingServices"],
       name: "Monsieur Esprit"
     },
     {
