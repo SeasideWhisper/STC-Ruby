@@ -119,6 +119,24 @@ module Text
       n: -> {
         KINGDOM[:happiness] += 2
       }
+    },
+    "vampireCrystal" => {
+      y: -> {
+        case rand(1..3)
+        when 1
+          KINGDOM[:money] += 50
+          KINGDOM[:happiness] += 5
+          "I see... fame and fortune for you!"
+        when 2
+          KINGDOM[:citizens] -= 15
+          KINGDOM[:happiness] -= 15
+          "I see... death, and misery!"
+        when 3
+          KINGDOM[:money] += 200
+          "I see... great wealth in your future!"
+        end
+      },
+      n: -> {}
     }
   }.freeze
 
@@ -194,6 +212,12 @@ module Text
       y: "The bells toll. Fear spreads.",
       n: "We stay quiet... for now.",
       affects: AFFECTS["dragonSighting"]
+    },
+    "vampireCrystal" => {
+      question: "Care to gaze into my vampire crystal? It might change your destiny.",
+      y: "Let us peer into the unknown...",
+      n: "Perhaps another time.",
+      affects: AFFECTS["vampireCrystal"]
     }
   }.freeze
 

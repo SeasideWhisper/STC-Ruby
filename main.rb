@@ -1,5 +1,6 @@
 require_relative 'text'
 require "tty-reader"
+# USE `bundle install` TO INSTALL DEPENDENCIES
 
 debug = false
 
@@ -17,7 +18,10 @@ KINGDOM = {
     happiness: 80
 }
 
-# USE `bundle install` TO INSTALL DEPENDENCIES
+
+def render(question)
+    sprintf('%100s', question)
+end
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
@@ -25,8 +29,9 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     6.times do
         personDialogue = people[rand(people.length())][:dialogue].sample
         puts personDialogue if debug
-        personQuestion = text[personDialogue.first][:question]
+        personQuestion = text[personDialogue][:question]
         puts personQuestion
+        render(personQuestion)
         key = ""
 
         # yo ben i fixed it so that it loops until "y" or "n" is entered
@@ -36,11 +41,11 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         prevKingdom = KINGDOM.dup
         # shows ye or no
         if key == "y"
-            puts text[personDialogue.first][:y]
-            text[personDialogue.first][:affects][:y].call
+            puts text[personDialogue][:y]
+            text[personDialogue][:affects][:y].call
         else 
-            puts text[personDialogue.first][:n]
-            text[personDialogue.first][:affects][:n].call
+            puts text[personDialogue][:n]
+            text[personDialogue][:affects][:n].call
         end
         KINGDOM.each do |key, value|
             difference = value - prevKingdom[key]
