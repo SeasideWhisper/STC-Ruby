@@ -1,6 +1,5 @@
 require_relative 'text'
 require "tty-reader"
-# USE `bundle install` TO INSTALL DEPENDENCIES
 
 debug = false
 
@@ -18,10 +17,15 @@ KINGDOM = {
     happiness: 80
 }
 
-
 def render(question)
     sprintf('%100s', question)
 end
+
+
+def printText(text)
+  puts text
+end
+
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
@@ -34,12 +38,10 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         render(personQuestion)
         key = ""
 
-        # yo ben i fixed it so that it loops until "y" or "n" is entered
         until key == "y" || key == "n"
             key = reader.read_keypress
         end
         prevKingdom = KINGDOM.dup
-        # shows ye or no
         if key == "y"
             puts text[personDialogue][:y]
             text[personDialogue][:affects][:y].call
@@ -52,14 +54,11 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
             difference = "+"+difference.to_s if difference > 0
             puts "#{key.capitalize}: #{difference}" if difference != 0
         end
-        
     end
 
-    # makes sure happiness and citizens dont go into the negatives
     KINGDOM[:citizens] = [KINGDOM[:citizens], 0].max
     KINGDOM[:happiness] = [KINGDOM[:happiness], 0].max
 
-    # stops if kingdom dies or collapses or whatever
     break if KINGDOM[:money] <= -1000 || KINGDOM[:citizens] <= 5
 end
 

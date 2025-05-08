@@ -120,23 +120,23 @@ module Text
         KINGDOM[:happiness] += 2
       }
     },
-    "vampireCrystal" => {
-      y: -> {
+   "vampireCrystal" => {
+      y: ->(printText) {
         case rand(1..3)
         when 1
           KINGDOM[:money] += 50
           KINGDOM[:happiness] += 5
-          "I see... fame and fortune for you!"
+          printText.call("I see... fame and fortune for you!")
         when 2
           KINGDOM[:citizens] -= 15
           KINGDOM[:happiness] -= 15
-          "I see... death, and misery!"
+          printText.call("I see... death, and misery!")
         when 3
           KINGDOM[:money] += 200
-          "I see... great wealth in your future!"
+          printText.call("I see... great wealth in your future!")
         end
       },
-      n: -> {}
+      n: -> {} 
     }
   }.freeze
 
