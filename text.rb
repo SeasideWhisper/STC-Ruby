@@ -1,122 +1,122 @@
 module Text
 
   PEOPLE = [
-    {
-      dialogue: ["goAdventure"],
-      name: "Yet Yet"
-    },
+    # {
+    #   dialogue: ["goAdventure"],
+    #   name: "Yet Yet"
+    # },
     {
       dialogue: ["feelinSpooky",  "nickName", "vampireCrystal"],
       name: "Lil Fang"
     },
-    {
-      dialogue: ["hauntingServices"],
-      name: "Monsieur Esprit"
-    },
-    {
-      dialogue: ["darkDeal"],
-      name: "Georgie"
-    },
-    {
-      dialogue: ["constructTavern"],
-      name: "Mason"
-    },
-    {
-      dialogue: ["petCat"],
-      name: "Boots"
-    },
-    {
-      dialogue: ["slayGoblins"],
-      name: "Witch"
-    },
-    {
-      dialogue: ["coolGuy"],
-      name: "Royal Advisor"
-    },
-    {
-      dialogue: ["plantTrees"],
-      name: "Greenthumb"
-    },
-    {
-      dialogue: ["taxRequest"],
-      name: "Collector"
-    },
-    {
-      dialogue: ["dragonSighting"],
-      name: "Scout"
-    }
+    # {
+    #   dialogue: ["hauntingServices"],
+    #   name: "Monsieur Esprit"
+    # },
+    # {
+    #   dialogue: ["darkDeal"],
+    #   name: "Georgie"
+    # },
+    # {
+    #   dialogue: ["constructTavern"],
+    #   name: "Mason"
+    # },
+    # {
+    #   dialogue: ["petCat"],
+    #   name: "Boots"
+    # },
+    # {
+    #   dialogue: ["slayGoblins"],
+    #   name: "Witch"
+    # },
+    # {
+    #   dialogue: ["coolGuy"],
+    #   name: "Royal Advisor"
+    # },
+    # {
+    #   dialogue: ["plantTrees"],
+    #   name: "Greenthumb"
+    # },
+    # {
+    #   dialogue: ["taxRequest"],
+    #   name: "Collector"
+    # },
+    # {
+    #   dialogue: ["dragonSighting"],
+    #   name: "Scout"
+    # }
   ].freeze
 
   AFFECTS = {
     "goAdventure" => {
-      y: -> { KINGDOM[:happiness] += 5 },
-      n: -> { KINGDOM[:happiness] -= 5 }
+      y: ->(printText) { KINGDOM[:happiness] += 5 },
+      n: ->(printText) { KINGDOM[:happiness] -= 5 }
     },
     "feelinSpooky" => {
-      y: -> { KINGDOM[:citizens] -= 1 },
-      n: -> {}
+      y: ->(printText) { KINGDOM[:citizens] -= 1 },
+      n: ->(printText) {}
     },
     "nickName" => {
-      y: -> { KINGDOM[:happiness] +=1 },
-      n: -> { KINGDOM[:happiness] -=1 }
+      y: ->(printText) { KINGDOM[:happiness] +=1 },
+      n: ->(printText) { KINGDOM[:happiness] -=1 }
     },
     "hauntingServices" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:money] -= 10
         KINGDOM[:happiness] += 5
       },
-      n: -> {}
+      n: ->(printText) {}
     },
     "darkDeal" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:money] += 250
         KINGDOM[:happiness] -= 35
       },
-      n: -> {}
+      n: ->(printText) {}
     },
     "constructTavern" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:money] -= 100
         KINGDOM[:happiness] += 15
       },
-      n: -> {}
+      n: ->(printText) {}
     },
     "petCat" => {
-      y: -> { KINGDOM[:happiness] += 3 },
-      n: -> {}
+      y: ->(printText) { KINGDOM[:happiness] += 3 },
+      n: ->(printText) {}
     },
     "slayGoblins" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:money] -= 10
         KINGDOM[:citizens] += 5
       },
-      n: -> { KINGDOM[:citizens] -= 3 }
+      n: ->(printText) { KINGDOM[:citizens] -= 3 }
     },
     "coolGuy" => {
-      y: -> { KINGDOM[:happiness] += 5 },
-      n: -> { KINGDOM[:happiness] -= 5 }
+      y: ->(printText) { KINGDOM[:happiness] += 5 },
+      n: ->(printText) { KINGDOM[:happiness] -= 5 }
     },
     "plantTrees" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:happiness] += 4
         KINGDOM[:citizens] += 1
         KINGDOM[:money] -= 20
       },
-      n: -> { KINGDOM[:happiness] -= 2 }
+      n: ->(printText) { KINGDOM[:happiness] -= 2 }
     },
     "taxRequest" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:money] += 50
         KINGDOM[:happiness] -= 10
       },
-      n: -> {}
+      n: ->(printText) {}
     },
     "dragonSighting" => {
-      y: -> {
+      y: ->(printText) {
         KINGDOM[:happiness] -= 10
         KINGDOM[:citizens] -= 2
       },
-      n: -> {
+      n: ->(printText) {
         KINGDOM[:happiness] += 2
       }
     },
@@ -136,7 +136,7 @@ module Text
           printText.call("I see... great wealth in your future!")
         end
       },
-      n: -> {} 
+      n: ->(printText) {} 
     }
   }.freeze
 

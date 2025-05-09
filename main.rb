@@ -26,6 +26,7 @@ def printText(text)
   puts text
 end
 
+printText = ->(text) { puts text }
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
@@ -43,11 +44,11 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         end
         prevKingdom = KINGDOM.dup
         if key == "y"
-            puts text[personDialogue][:y]
-            text[personDialogue][:affects][:y].call
+            printText(text[personDialogue][:y])
+            text[personDialogue][:affects][:y].call(printText)
         else 
-            puts text[personDialogue][:n]
-            text[personDialogue][:affects][:n].call
+            printText(text[personDialogue][:n])
+            text[personDialogue][:affects][:n].call(printText)
         end
         KINGDOM.each do |key, value|
             difference = value - prevKingdom[key]
