@@ -8,50 +8,50 @@ module Text
   reset = "\e[0m"
 
   PEOPLE = [
-    # {
-    #   dialogue: ["goAdventure"],
-    #   name: "Yet Yet"
-    # },
+    {
+      dialogue: ["goAdventure"],
+      name: "Yet Yet"
+    },
     {
       dialogue: ["feelinSpooky",  "nickName", "vampireCrystal"],
       name: "Lil Fang"
     },
-    # {
-    #   dialogue: ["hauntingServices"],
-    #   name: "Monsieur Esprit"
-    # },
-    # {
-    #   dialogue: ["darkDeal"],
-    #   name: "Georgie"
-    # },
-    # {
-    #   dialogue: ["constructTavern"],
-    #   name: "Mason"
-    # },
-    # {
-    #   dialogue: ["petCat"],
-    #   name: "Boots"
-    # },
-    # {
-    #   dialogue: ["slayGoblins"],
-    #   name: "Witch"
-    # },
-    # {
-    #   dialogue: ["coolGuy"],
-    #   name: "Royal Advisor"
-    # },
-    # {
-    #   dialogue: ["plantTrees"],
-    #   name: "Greenthumb"
-    # },
-    # {
-    #   dialogue: ["taxRequest"],
-    #   name: "Collector"
-    # },
-    # {
-    #   dialogue: ["dragonSighting"],
-    #   name: "Scout"
-    # }
+    {
+      dialogue: ["hauntingServices"],
+      name: "Monsieur Esprit"
+    },
+    {
+      dialogue: ["darkDeal"],
+      name: "Georgie"
+    },
+    {
+      dialogue: ["constructTavern"],
+      name: "Mason"
+    },
+    {
+      dialogue: ["petCat"],
+      name: "Boots"
+    },
+    {
+      dialogue: ["slayGoblins"],
+      name: "Witch"
+    },
+    {
+      dialogue: ["coolGuy"],
+      name: "Royal Advisor"
+    },
+    {
+      dialogue: ["plantTrees"],
+      name: "Greenthumb"
+    },
+    {
+      dialogue: ["taxRequest"],
+      name: "Collector"
+    },
+    {
+      dialogue: ["dragonSighting"],
+      name: "Scout"
+    }
   ].freeze
 
   AFFECTS = {
