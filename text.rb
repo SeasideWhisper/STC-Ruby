@@ -1,5 +1,12 @@
 module Text
 
+  red = "\e[31m"
+  green = "\e[32m"
+  yellow = "\e[33m"
+  blue = "\e[34m"
+  white = "\e[37m"
+  reset = "\e[0m"
+
   PEOPLE = [
     # {
     #   dialogue: ["goAdventure"],
@@ -126,14 +133,14 @@ module Text
         when 1
           KINGDOM[:money] += 50
           KINGDOM[:happiness] += 5
-          printText.call("I see... fame and fortune for you!")
+          printText.call(blue+"I see... fame and fortune for you!")
         when 2
           KINGDOM[:citizens] -= 15
           KINGDOM[:happiness] -= 15
-          printText.call("I see... death, and misery!")
+          printText.call(red+"I see... death, and misery!")
         when 3
           KINGDOM[:money] += 200
-          printText.call("I see... great wealth in your future!")
+          printText.call(yellow+"I see... great wealth in your future!")
         end
       },
       n: ->(printText) {} 

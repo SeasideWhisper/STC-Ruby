@@ -22,20 +22,31 @@ def render(question)
 end
 
 
-def printText(text)
-  puts text
-end
+red = "\e[31m"
+green = "\e[32m"
+yellow = "\e[33m"
+blue = "\e[34m"
+white = "\e[37m"
+reset = "\e[0m"
 
-printText = ->(text) { puts text }
+
+printText = ->(text) { 
+    puts text+reset 
+    sleep 0.5
+}
+
+def printText(text)
+    printText.call(text)
+end
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
     
     6.times do
         personDialogue = people[rand(people.length())][:dialogue].sample
-        puts personDialogue if debug
+        printText.call(personDialogue)  if debug
         personQuestion = text[personDialogue][:question]
-        puts personQuestion
+        printText.call(personQuestion)
         render(personQuestion)
         key = ""
 
@@ -44,17 +55,23 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         end
         prevKingdom = KINGDOM.dup
         if key == "y"
-            printText(text[personDialogue][:y])
+            printText.call(text[personDialogue][:y])
             text[personDialogue][:affects][:y].call(printText)
         else 
-            printText(text[personDialogue][:n])
+            printText.call(text[personDialogue][:n])
             text[personDialogue][:affects][:n].call(printText)
         end
         KINGDOM.each do |key, value|
             difference = value - prevKingdom[key]
-            difference = "+"+difference.to_s if difference > 0
-            puts "#{key.capitalize}: #{difference}" if difference != 0
+            differenceString = difference.to_s
+            differenceString = "+"+difference.to_s if difference > 0
+            effectText = red+"#{key.capitalize}: #{differenceString}"
+            if difference > 0
+                effectText = green+"#{key.capitalize}: #{differenceString}"
+            end
+            printText.call(effectText)if difference != 0
         end
+        sleep 1
     end
 
     KINGDOM[:citizens] = [KINGDOM[:citizens], 0].max
