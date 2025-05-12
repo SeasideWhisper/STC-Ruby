@@ -138,9 +138,9 @@ module Text
     "slayGoblins" => {
       y: ->(printText) {
         KINGDOM[:money] -= 10
-        KINGDOM[:people] += 5
+        KINGDOM[:citizens] += 5
       },
-      n: ->(printText) { KINGDOM[:people] -= 3 }
+      n: ->(printText) { KINGDOM[:citizens] -= 3 }
     },
     "coolGuy" => {
       y: ->(printText) { KINGDOM[:happiness] += 5 },
@@ -149,7 +149,7 @@ module Text
     "plantTrees" => {
       y: ->(printText) {
         KINGDOM[:happiness] += 4
-        KINGDOM[:people] += 1
+        KINGDOM[:citizens] += 1
         KINGDOM[:money] -= 20
       },
       n: ->(printText) { KINGDOM[:happiness] -= 2 }
@@ -164,7 +164,7 @@ module Text
     "dragonSighting" => {
       y: ->(printText) {
         KINGDOM[:happiness] -= 10
-        KINGDOM[:people] -= 2
+        KINGDOM[:citizens] -= 2
       },
       n: ->(printText) {
         KINGDOM[:happiness] += 2
@@ -184,7 +184,7 @@ module Text
       y: ->(printText) {
         KINGDOM[:money] -= 50
         KINGDOM[:happiness] += 10
-        KINGDOM[:people] += 1
+        KINGDOM[:citizens] += 1
       },
       n: ->(printText) { KINGDOM[:happiness] -= 3 }
     },
@@ -197,7 +197,7 @@ module Text
         KINGDOM[:money] -= 5
         KINGDOM[:happiness] += 7
       },
-      n: ->(printText) { KINGDOM[:people] += 3 }
+      n: ->(printText) { KINGDOM[:citizens] += 3 }
     },
     "soupShop" => {
       y: ->(printText) {
@@ -230,7 +230,7 @@ module Text
     "ghostTown" => {
       y: ->(printText) {
         KINGDOM[:happiness] += 10
-        KINGDOM[:people] += 5
+        KINGDOM[:citizens] += 5
       },
       n: ->(printText) {}
     },
@@ -283,7 +283,7 @@ TEXT = {
       affects: AFFECTS["nickName"]
     },
     "hauntingServices" => {
-      question: "Do you require any haunting services? For a small price I’ll scare some people for you.",
+      question: "Do you require any haunting services? For a small price I’ll scare some citizens for you.",
       y: "Consider them haunted.",
       n: "No worries, I’ll be back later.",
       affects: AFFECTS["hauntingServices"]
@@ -341,7 +341,37 @@ TEXT = {
       y: "Let us peer into the unknown...",
       n: "Perhaps another time.",
       affects: AFFECTS["vampireCrystal"]
-    }
+    },
+    "meteorShower" => {
+    question: "A meteor shower is coming tonight! Shall we host a royal viewing party?",
+    y: "The people marvel at the sky!",
+    n: "A missed opportunity to gaze at the stars.",
+    affects: AFFECTS["meteorShower"]
+  },
+  "jesterJoke" => {
+    question: "May I tell a joke to the court? Laughter is the best medicine!",
+    y: "HAHAHA! A true fool!",
+    n: "A silent room... tough crowd.",
+    affects: AFFECTS["jesterJoke"]
+  },
+  "mermaidHelp" => {
+    question: "Queen! A mermaid seeks shelter. Shall we grant her safety?",
+    y: "She blesses the waters with bounty.",
+    n: "She vanishes beneath the waves...",
+    affects: AFFECTS["mermaidHelp"]
+  },
+  "lostChild" => {
+    question: "A child is lost in the woods! Shall we organize a search party?",
+    y: "The child returns home. Joy fills the village.",
+    n: "The villagers grieve the silence.",
+    affects: AFFECTS["lostChild"]
+  },
+  "supplyRaid" => {
+    question: "We've spotted an undefended caravan. Shall we seize the supplies?",
+    y: "The treasury swells, but at a cost.",
+    n: "We remain honorable. The people nod in approval.",
+    affects: AFFECTS["supplyRaid"]
+  }
   }.freeze
 
 end

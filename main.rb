@@ -41,12 +41,16 @@ end
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
-    
+    oldKingdom = KINGDOM.dup
     6.times do
         
-        personDialogue = people[rand(people.length())][:dialogue].sample
-        printText.call(personDialogue)  if debug
-        personQuestion = text[personDialogue][:question]
+        keyedDialogue = nil
+        while keyedDialogue == nil
+            personDialogue = people[rand(people.length())][:dialogue].sample
+            printText.call(personDialogue)  if debug
+            keyedDialogue = text[personDialogue]
+        end
+        personQuestion = keyedDialogue[:question]
         printText.call(personQuestion)
         render(personQuestion)
         key = ""
@@ -77,6 +81,20 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
 
     KINGDOM[:citizens] = [KINGDOM[:citizens], 0].max
     KINGDOM[:happiness] = [KINGDOM[:happiness], 0].max
+
+    printText.call("Week Summary:")
+    KINGDOM.each do |key, value|
+        difference = value - oldKingdom[key]
+        differenceString = difference.to_s
+        differenceString = "+"+difference.to_s if difference > 0
+        effectText = red+"#{key.capitalize}: #{differenceString}"
+        if difference > 0
+            effectText = green+"#{key.capitalize}: #{differenceString}"
+        end
+        printText.call(effectText)
+    end
+    printText.call("Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}")
+
 
     break if KINGDOM[:money] <= -1000 || KINGDOM[:citizens] <= 5
 end
