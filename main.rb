@@ -43,6 +43,7 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
     puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
     
     6.times do
+        
         personDialogue = people[rand(people.length())][:dialogue].sample
         printText.call(personDialogue)  if debug
         personQuestion = text[personDialogue][:question]
