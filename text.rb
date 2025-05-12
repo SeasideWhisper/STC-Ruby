@@ -91,9 +91,6 @@ module Text
     {
       dialogue: ["demonicRequest"],
       name: "Demon"
-    },
-    {
-      dalogue: []
     }
   ].freeze
 

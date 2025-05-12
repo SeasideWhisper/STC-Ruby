@@ -1,7 +1,7 @@
 require_relative 'text'
 require "tty-reader"
 
-debug = false
+debug = true
 
 reader = TTY::Reader.new
 
@@ -28,30 +28,44 @@ yellow = "\e[33m"
 blue = "\e[34m"
 white = "\e[37m"
 reset = "\e[0m"
+bold = "\e[1m"
+underlined = "\e[4m"
+italic = "\e[3m"
 
-
-printText = ->(text) { 
-    puts text+reset 
-    sleep 0.5
+printText = ->(text, name=nil) { 
+    if name
+        puts green+underlined+name+reset+": "+text+reset 
+    else 
+        puts text+reset 
+    end
+    sleep 0.5 if !debug
 }
 
-def printText(text)
+def printText(text, name=nil)
     printText.call(text)
 end
 
 while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
-    puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
     oldKingdom = KINGDOM.dup
+    prevName = ""
     6.times do
-        
+        puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+        puts "Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}"
         keyedDialogue = nil
-        while keyedDialogue == nil
-            personDialogue = people[rand(people.length())][:dialogue].sample
-            printText.call(personDialogue)  if debug
-            keyedDialogue = text[personDialogue]
+        personName = ""
+       
+        while keyedDialogue.nil? || prevName == personName
+            person = people[rand(people.length())]
+            personName = person[:name]
+            if person[:dialogue]
+                personDialogue = person[:dialogue].sample
+                printText.call(personDialogue) if debug
+                keyedDialogue = text[personDialogue]
+            end
         end
+        prevName = personName.dup
         personQuestion = keyedDialogue[:question]
-        printText.call(personQuestion)
+        printText.call(personQuestion, personName)
         render(personQuestion)
         key = ""
 
@@ -76,13 +90,13 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
             end
             printText.call(effectText)if difference != 0
         end
-        sleep 1
+        sleep 1 if !debug
     end
 
     KINGDOM[:citizens] = [KINGDOM[:citizens], 0].max
     KINGDOM[:happiness] = [KINGDOM[:happiness], 0].max
 
-    printText.call("Week Summary:")
+    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n=========================\nWeek Summary:"
     KINGDOM.each do |key, value|
         difference = value - oldKingdom[key]
         differenceString = difference.to_s
@@ -93,8 +107,20 @@ while KINGDOM[:money] > -1000 && KINGDOM[:citizens] > 5
         end
         printText.call(effectText)
     end
-    printText.call("Current Kingdom Status: Money: #{KINGDOM[:money]}, Citizens: #{KINGDOM[:citizens]}, Happiness: #{KINGDOM[:happiness]}")
+    printText.call("========================")
+    if KINGDOM:happiness > 20
+        printText.call(green+"Your Citizens are Happy!")
+    else 
+        printText.call(red+"Your Citizens are Unhappy!")
+    end
+    puts "========================="
+    puts "Press [space] to continue!"
 
+    key = ""
+    until key == " " 
+        key = reader.read_keypress
+        puts "["+key+"]" if debug
+    end
 
     break if KINGDOM[:money] <= -1000 || KINGDOM[:citizens] <= 5
 end
