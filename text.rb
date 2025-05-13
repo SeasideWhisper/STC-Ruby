@@ -389,7 +389,7 @@ module Text
       affects: AFFECTS["juggle"],
     },
     "buyFlowers" => {
-      question: "Would you like to buy some flowers from our garden? They're a special low price for you, sir/madam!",
+      question: "Would you like to buy some flowers from our garden? They're a special low price for you, madam!",
       y: "Flowers are soo lovely!",
       n: "I'll return to the garden, then.",
       affects: AFFECTS["buyFlowers"],
