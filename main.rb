@@ -1,7 +1,7 @@
 require_relative "text"
 require "tty-reader"
 
-debug = true
+debug = false
 
 reader = TTY::Reader.new
 
