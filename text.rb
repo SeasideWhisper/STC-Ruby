@@ -108,7 +108,8 @@ module Text
     "darkDeal" => {
       y: ->(printText) {
         KINGDOM[:money] += 250
-        KINGDOM[:happiness] -= 35
+        KINGDOM[:happiness] -= 10
+        KINGDOM[:citizens] -= 15
       },
       n: ->(printText) { },
     },
